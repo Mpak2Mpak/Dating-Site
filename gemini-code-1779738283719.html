@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For my Wife❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.15);
+            width: 100%;
+            max-width: 340px;
+            animation: fadeIn 0.8s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 420px; 
+            justify-content: space-between;
+        }
+
+        .top-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: center;
+            position: relative;
+            padding-top: 70px; 
+        }
+
+        .heart-container {
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99; 
+            padding: 5px 20px;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            animation: heartbeat 1.2s infinite;
+            display: inline-block;
+        }
+
+        .thinking-cat-container {
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px) scale(0.1);
+            z-index: 100; 
+            pointer-events: none;
+            display: none; 
+            border-radius: 50%;
+            overflow: hidden;
+            width: 90px; 
+            height: 90px;
+            background: white; 
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        .thinking-cat-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center; 
+        }
+
+        .top-content.shift-1 .heart-container { display: none; opacity: 0; }
+        .top-content.shift-1 .thinking-cat-container { display: block; transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+        .top-content.shift-2 .thinking-cat-container { display: block; transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+        .top-content.shift-3 .thinking-cat-container { display: block; transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+
+        h1 {
+            color: #ff4b6e;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+            transform-origin: center;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), color 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 10px;
+            z-index: 1; 
+        }
+
+        .top-content.shift-1 h1 { transform: translateY(-42px) scale(0.625); color: #8e8e93; font-weight: 500; opacity: 0.4; }
+        .top-content.shift-2 h1 { transform: translateY(-84px) scale(0.4); opacity: 0; }
+
+        .misclick-wrapper { position: absolute; bottom: 10px; width: 100%; height: 40px; display: flex; justify-content: center; align-items: center; z-index: 5; }
+        .misclick-text { color: #ff4b6e; font-size: 24px; font-weight: 700; line-height: 1.4; opacity: 0; transform: scale(3.5); white-space: nowrap; pointer-events: none; width: 100%; position: absolute; display: none; }
+        .misclick-text.pop-and-shrink { display: block; animation: dramaticPop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .top-content.shift-2 #hintText1 { animation: transitionToGray 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+        .top-content.shift-3 #hintText1 { animation: fadeOutCompletely 0.4s ease-out forwards !important; }
+        .top-content.shift-3 #hintText2 { animation: transitionToGray 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+
+        .btn-container { display: flex; justify-content: space-between; gap: 15px; margin-top: 25px; width: 100%; z-index: 100; }
+        .btn { flex: 1; padding: 16px 0; font-size: 18px; font-weight: 600; border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: background-color 0.2s, transform 0.1s; }
+        #yesBtn { background-color: #ff4b6e; color: white; }
+        #noBtn { background-color: #f2f2f7; color: #3a3a3c; }
+
+        .bounce { animation: stableBounce 0.4s ease-in-out; }
+        .xiaomi-uninstall { animation: xiaomiShatter 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards !important; pointer-events: none; }
+
+        .success-message { display: none; animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; flex-direction: column; align-items: center; }
+        .success-message h2 { color: #ff4b6e; font-size: 26px; margin-bottom: 15px; margin-top: 10px; }
+        .success-message p { color: #555; font-size: 16px; }
+
+        /* Updated 50% larger container (112.5px) */
+        .success-icon-container {
+            width: 112.5px;
+            height: 112.5px;
+            margin: 10px auto 20px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .success-icon-img { width: 100%; height: 100%; object-fit: cover; }
+
+        @keyframes heartbeat { 0% { transform: scale(1); } 20% { transform: scale(1.08); } 40% { transform: scale(1); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
+        @keyframes stableBounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(0.92) translateY(-4px); } 65% { transform: scale(1.03) translateY(2px); } }
+        @keyframes dramaticPop { 0% { opacity: 0; transform: scale(3.5); } 15% { opacity: 1; } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes transitionToGray { 0% { transform: scale(1) translateY(0); color: #ff4b6e; opacity: 1; } 100% { transform: scale(0.625) translateY(-92px); color: #8e8e93; font-weight: 500; opacity: 0.4; } }
+        @keyframes fadeOutCompletely { to { transform: scale(0.5) translateY(-120px); opacity: 0; } }
+        @keyframes xiaomiShatter { 0% { transform: scale(1); filter: blur(0px) contrast(1); opacity: 1; } 33% { transform: scale(1.1) rotate(-3deg); filter: blur(1px) contrast(1.2); opacity: 0.9; } 100% { transform: scale(0.01) rotate(12deg); filter: blur(8px) contrast(2) brightness(1.5); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <div class="top-content" id="topContentBlock">
+            <div class="heart-container" id="heartWrapper"><div class="heart-icon">❤️</div></div>
+            <div class="thinking-cat-container" id="catWrapper"><img id="catImg" src="https://media4.giphy.com/media/uUnPYB37kLHvFnH4bi/giphy.gif" alt="Thinking Cat" class="thinking-cat-img"></div>
+            <h1 id="mainQuestion">Will you go out on a date with me, Artemis?</h1>
+            <div class="misclick-wrapper">
+                <div class="misclick-text" id="hintText1">You misclicked I know</div>
+                <div class="misclick-text" id="hintText2">Maybe you're lagging</div>
+                <div class="misclick-text" id="hintText3">Let me help you</div>
+            </div>
+        </div>
+        <div class="btn-container" id="btnBlock">
+            <button class="btn" id="yesBtn" onclick="sayYes()">Yes</button>
+            <button class="btn" id="noBtn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <div class="container success-message" id="successCard">
+        <div class="success-icon-container">
+            <img src="https://media3.giphy.com/media/15UbO1LY4O2Fxw8gnI/giphy.gif" alt="Chad Cat" class="success-icon-img">
+        </div>
+        <h2>Date secured my little kitten</h2>
+        <p>Can't wait for our date. ❤️</p>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        function handleNo() {
+            const noBtn = document.getElementById('noBtn');
+            const topContentBlock = document.getElementById('topContentBlock');
+            const mainQuestion = document.getElementById('mainQuestion');
+            const heartWrapper = document.getElementById('heartWrapper');
+            const catImg = document.getElementById('catImg');
+            const hint1 = document.getElementById('hintText1');
+            const hint2 = document.getElementById('hintText2');
+            const hint3 = document.getElementById('hintText3');
+
+            noClickCount++;
+            noBtn.classList.remove('bounce');
+            void noBtn.offsetWidth; 
+            noBtn.classList.add('bounce');
+
+            if (noClickCount === 1) {
+                topContentBlock.classList.add('shift-1');
+                hint1.classList.add('pop-and-shrink');
+            } else if (noClickCount === 2) {
+                heartWrapper.style.display = 'none';
+                catImg.src = "https://media1.giphy.com/media/Bji7HlLgQ725R8ja10/giphy.gif";
+                topContentBlock.classList.remove('shift-1');
+                topContentBlock.classList.add('shift-2');
+                hint2.classList.add('pop-and-shrink');
+            } else if (noClickCount === 3) {
+                catImg.src = "https://media3.giphy.com/media/ytu2GUYbvhz7zShGwS/giphy.gif";
+                mainQuestion.style.display = 'none';
+                topContentBlock.classList.remove('shift-2');
+                topContentBlock.classList.add('shift-3');
+                hint3.classList.add('pop-and-shrink');
+                noBtn.classList.add('xiaomi-uninstall');
+                setTimeout(() => noBtn.remove(), 600);
+            }
+        }
+        function sayYes() {
+            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('successCard').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
