@@ -133,24 +133,13 @@
         .xiaomi-uninstall { animation: xiaomiShatter 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards !important; pointer-events: none; }
 
         .success-message { display: none; animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; flex-direction: column; align-items: center; }
-        .success-message h2 { color: #ff4b6e; font-size: 26px; margin-bottom: 15px; margin-top: 10px; }
-        .success-message p { color: #555; font-size: 16px; }
-
-        /* Updated 50% larger container (112.5px) */
+        
         .success-icon-container {
-            width: 112.5px;
-            height: 112.5px;
-            margin: 10px auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border: 4px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            width: 100%; 
+            max-width: 300px;
+            margin: 0 auto 20px auto;
         }
-        .success-icon-img { width: 100%; height: 100%; object-fit: cover; }
+        .success-icon-img { width: 100%; height: auto; border-radius: 20px; }
 
         @keyframes heartbeat { 0% { transform: scale(1); } 20% { transform: scale(1.08); } 40% { transform: scale(1); } 60% { transform: scale(1.08); } 100% { transform: scale(1); } }
         @keyframes stableBounce { 0%, 100% { transform: scale(1); } 30% { transform: scale(0.92) translateY(-4px); } 65% { transform: scale(1.03) translateY(2px); } }
@@ -168,7 +157,7 @@
         <div class="top-content" id="topContentBlock">
             <div class="heart-container" id="heartWrapper"><div class="heart-icon">❤️</div></div>
             <div class="thinking-cat-container" id="catWrapper"><img id="catImg" src="https://media4.giphy.com/media/uUnPYB37kLHvFnH4bi/giphy.gif" alt="Thinking Cat" class="thinking-cat-img"></div>
-            <h1 id="mainQuestion">Will you go out on a date with me?</h1>
+            <h1 id="mainQuestion">Will you go out on a date with me, Artemis?</h1>
             <div class="misclick-wrapper">
                 <div class="misclick-text" id="hintText1">You misclicked I know</div>
                 <div class="misclick-text" id="hintText2">Maybe you're lagging</div>
@@ -182,11 +171,10 @@
     </div>
 
     <div class="container success-message" id="successCard">
-        <div class="success-icon-container">
-            <img src="https://media3.giphy.com/media/15UbO1LY4O2Fxw8gnI/giphy.gif" alt="Chad Cat" class="success-icon-img">
+        <div class="success-icon-container" id="finalImageWrapper">
+            <img id="finalImg" src="" alt="Response" class="success-icon-img">
         </div>
-        <h2>Date secured my little kitten</h2>
-        <p>Can't wait for our date. ❤️</p>
+        <h2 id="finalText"></h2>
     </div>
 
     <script>
@@ -227,7 +215,10 @@
         }
         function sayYes() {
             document.getElementById('mainCard').style.display = 'none';
-            document.getElementById('successCard').style.display = 'flex';
+            const successCard = document.getElementById('successCard');
+            successCard.style.display = 'flex';
+            document.getElementById('finalImg').src = "https://media.giphy.com/media/0QmAqDWbOHMVZZPO7s/giphy.gif";
+            document.getElementById('finalText').innerText = "fack you";
         }
     </script>
 </body>
